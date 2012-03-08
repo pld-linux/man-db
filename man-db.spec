@@ -28,6 +28,7 @@ Requires:	gzip
 Requires:	less
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.6g-3
+Obsoletes:	man-whatis
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		cache	/var/cache/man
