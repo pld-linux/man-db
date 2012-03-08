@@ -64,19 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 # move the documentation to relevant place
 mv $RPM_BUILD_ROOT%{_datadir}/doc/man-db/* ./
 
-# remove zsoelim - part of groff package
-rm $RPM_BUILD_ROOT%{_bindir}/zsoelim
-rm $RPM_BUILD_ROOT%{_mandir}/man1/zsoelim.1
-
-# remove pages which are also in  man-pages-de
-rm $RPM_BUILD_ROOT%{_mandir}/de/man1/zsoelim.1
-rm $RPM_BUILD_ROOT%{_mandir}/de/man1/manpath.1
-rm $RPM_BUILD_ROOT%{_mandir}/de/man5/manpath.5
-rm $RPM_BUILD_ROOT%{_mandir}/de/man8/catman.8
-rm $RPM_BUILD_ROOT%{_mandir}/de/man8/mandb.8
-
 # remove libtool archives
-rm $RPM_BUILD_ROOT%{_libdir}/man-db/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/man-db/*.la
 
 # install cache directory
 install -d $RPM_BUILD_ROOT%{cache}
@@ -99,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README man-db-manual.txt man-db-manual.ps docs/COPYING ChangeLog NEWS
 %config(noreplace) %{_sysconfdir}/man_db.conf
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/man-db
-/etc/cron.daily/man-db.cron
+%attr(750,root,root) /etc/cron.daily/man-db.cron
 %attr(755,root,root) %{_sbindir}/accessdb
 %attr(755,root,root) %{_bindir}/man
 %attr(755,root,root) %{_bindir}/whatis
@@ -108,6 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lexgrog
 %attr(755,root,root) %{_bindir}/catman
 %attr(755,root,root) %{_bindir}/mandb
+%attr(755,root,root) %{_bindir}/zsoelim
 %dir %{_libdir}/man-db
 %{_libdir}/man-db/*.so
 %{_libdir}/man-db/globbing
@@ -120,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/manconv.1*
 %{_mandir}/man1/manpath.1*
 %{_mandir}/man1/whatis.1*
+%{_mandir}/man1/zsoelim.1*
 %{_mandir}/man5/manpath.5*
 %{_mandir}/man8/accessdb.8*
 %{_mandir}/man8/catman.8*
