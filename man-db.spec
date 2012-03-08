@@ -1,7 +1,7 @@
 Summary:	Tools for searching and reading man pages
 Name:		man-db
 Version:	2.6.1
-Release:	3
+Release:	4
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
