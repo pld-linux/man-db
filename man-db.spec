@@ -1,7 +1,7 @@
 Summary:	Tools for searching and reading man pages
 Name:		man-db
 Version:	2.6.1
-Release:	4
+Release:	5
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -28,6 +28,7 @@ Requires:	gzip
 Requires:	less
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.6g-3
+Obsoletes:	man-config
 Obsoletes:	man-whatis
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
