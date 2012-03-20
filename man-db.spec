@@ -1,7 +1,7 @@
 Summary:	Tools for searching and reading man pages
 Name:		man-db
 Version:	2.6.1
-Release:	5
+Release:	6
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -11,6 +11,7 @@ Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar
 # Source0-md5:	79658e8695c7b9b3be1ee340d78a4692
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
+Patch0:		so-include.patch
 # Resolves: #655385 - use old format of nroff output
 Patch1:		sgr.patch
 BuildRequires:	gdbm-devel
@@ -44,6 +45,7 @@ pages.
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1
 
 %build
