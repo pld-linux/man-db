@@ -7,7 +7,7 @@
 +				if (strchr(include, '/') == NULL) {
 +					char *sec = strrchr(include, '.');
 +					debug ("ult_src: wrong .so include %s\n", buffer);
-+					if (sec != NULL && *sec++ != NULL) {
++					if (sec != NULL && *sec++ != '\0') {
 +						free (base);
 +						base = appendstr (NULL, path, "/man", sec, "/", include, NULL);
 +					}
