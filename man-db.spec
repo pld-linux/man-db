@@ -19,7 +19,7 @@ BuildRequires:	gettext
 BuildRequires:	groff
 BuildRequires:	less
 BuildRequires:	libpipeline-devel
-BuildRequires:	po4a
+BuildRequires:	po4a >= 0.41
 BuildRequires:	zlib-devel
 Requires:	coreutils
 Requires:	crontabs
