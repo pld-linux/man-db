@@ -1,14 +1,14 @@
 Summary:	Tools for searching and reading man pages
 Name:		man-db
-Version:	2.6.1
-Release:	7
+Version:	2.6.2
+Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 URL:		http://www.nongnu.org/man-db/
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.gz
-# Source0-md5:	79658e8695c7b9b3be1ee340d78a4692
+# Source0-md5:	8fecb7d7b90e27f5d669269141d09cee
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 Patch0:		so-include.patch
