@@ -1,4 +1,4 @@
-ummary:	Tools for searching and reading man pages
+Summary:	Tools for searching and reading man pages
 Name:		man-db
 Version:	2.6.2
 Release:	2
