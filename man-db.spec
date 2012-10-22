@@ -1,26 +1,27 @@
 Summary:	Tools for searching and reading man pages
 Name:		man-db
-Version:	2.6.2
-Release:	3
+Version:	2.6.3
+Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 URL:		http://www.nongnu.org/man-db/
-Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.gz
-# Source0-md5:	8fecb7d7b90e27f5d669269141d09cee
+Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
+# Source0-md5:	a593a095599ae97bcacf8d038659a146
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 Patch0:		so-include.patch
 # Resolves: #655385 - use old format of nroff output
 Patch1:		sgr.patch
-Patch2:		man-db-gnulib.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext
 BuildRequires:	groff
 BuildRequires:	less
 BuildRequires:	libpipeline-devel
 BuildRequires:	po4a >= 0.41
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	coreutils
 Requires:	crontabs
@@ -48,7 +49,6 @@ pages.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %configure\
