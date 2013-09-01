@@ -1,24 +1,25 @@
 Summary:	Tools for searching and reading man pages
+Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.6.3
+Version:	2.6.5
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
-URL:		http://www.nongnu.org/man-db/
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	a593a095599ae97bcacf8d038659a146
+# Source0-md5:	36f59d9314b45a266ba350584b4d7cc1
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
-Patch0:		so-include.patch
 # Resolves: #655385 - use old format of nroff output
-Patch1:		sgr.patch
+Patch0:		sgr.patch
+URL:		http://www.nongnu.org/man-db/
 BuildRequires:	gdbm-devel
-BuildRequires:	gettext
+BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	groff
 BuildRequires:	less
-BuildRequires:	libpipeline-devel
+BuildRequires:	libpipeline-devel >= 1.1.0
+BuildRequires:	pkgconfig
 BuildRequires:	po4a >= 0.41
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -29,6 +30,7 @@ Requires:	grep
 Requires:	groff
 Requires:	gzip
 Requires:	less
+Requires:	libpipeline >= 1.1.0
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
 Obsoletes:	man-config
@@ -39,22 +41,34 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The man-db package includes five tools for browsing man-pages: man,
-whatis, apropos, manpath and lexgrog. man preformats and displays
-manual pages. whatis searches the manual page names. apropos searches
-the manual page names and descriptions. manpath determines search path
-for manual pages. lexgrog directly reads header information in manual
-pages.
+whatis, apropos, manpath and lexgrog:
+- man preformats and displays manual pages.
+- whatis searches the manual page names.
+- apropos searches the manual page names and descriptions.
+- manpath determines search path for manual pages.
+- lexgrog directly reads header information in manual pages.
+
+%description -l pl.UTF-8
+Pakiet man-db zawiera pięć narzędzi do przeglądania stron podręcznika
+man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
+- man wstępnie formatuje i wyświetla strony podręcznika.
+- whatis przeszukuje nazwy stron podręcznika.
+- apropos przeszukuje nazwy stron podręcznika oraz opisy.
+- manpath określa ścieżkę przeszukiwania dla stron podręcznika.
+- lexgrog bezpośrednio odczytuje informacje z nagłówka stron
+  podręcznika.
+
 
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
-%configure\
-	--with-sections="1 1p 8 2 3 3p 4 5 6 7 9 0p n l p o 1x 2x 3x 4x 5x 6x 7x 8x" \
+%configure \
 	--disable-setuid \
-	--with-browser=elinks
+	--disable-silent-rules \
+	--with-browser=elinks \
+	--with-sections="1 1p 8 2 3 3p 4 5 6 7 9 0p n l p o 1x 2x 3x 4x 5x 6x 7x 8x"
 
 %{__make} \
 	V=1 \
@@ -105,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/mandb
 %attr(755,root,root) %{_bindir}/zsoelim
 %dir %{_libdir}/man-db
-%{_libdir}/man-db/*.so
+%attr(755,root,root) %{_libdir}/man-db/*.so
 %{_libdir}/man-db/globbing
 %{_libdir}/man-db/manconv
 %dir %{cache}
@@ -121,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/accessdb.8*
 %{_mandir}/man8/catman.8*
 %{_mandir}/man8/mandb.8*
+%lang(da) %{_mandir}/da/man*/*
 %lang(de) %{_mandir}/de/man*/*
 %lang(es) %{_mandir}/es/man*/*
 %lang(fr) %{_mandir}/fr/man*/*
@@ -130,3 +145,4 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_mandir}/nl/man*/*
 %lang(pl) %{_mandir}/pl/man*/*
 %lang(ru) %{_mandir}/ru/man*/*
+%lang(zh_CN) %{_mandir}/zh_CN/man*/*
