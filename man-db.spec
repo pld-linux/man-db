@@ -1,14 +1,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.6.5
-Release:	4
+Version:	2.6.6
+Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	36f59d9314b45a266ba350584b4d7cc1
+# Source0-md5:	5d65d66191080c144437a6c854e17868
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
