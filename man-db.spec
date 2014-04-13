@@ -1,14 +1,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.6.6
+Version:	2.6.7.1
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	5d65d66191080c144437a6c854e17868
+# Source0-md5:	ce7b697f8e8016a085d9f5975ae6c4fb
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -18,7 +18,7 @@ BuildRequires:	gdbm-devel
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	groff
 BuildRequires:	less
-BuildRequires:	libpipeline-devel >= 1.1.0
+BuildRequires:	libpipeline-devel >= 1.3.0
 BuildRequires:	pkgconfig
 BuildRequires:	po4a >= 0.41
 BuildRequires:	tar >= 1:1.22
@@ -30,7 +30,7 @@ Requires:	grep
 Requires:	groff
 Requires:	gzip
 Requires:	less
-Requires:	libpipeline >= 1.1.0
+Requires:	libpipeline >= 1.3.0
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
 Obsoletes:	man-config
