@@ -1,14 +1,15 @@
+%bcond_without	tests
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.6.7.1
+Version:	2.7.0.2
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	ce7b697f8e8016a085d9f5975ae6c4fb
+# Source0-md5:	8ea7be9daf7af7da0fcd619e3da3991c
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -68,11 +69,14 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 	--disable-setuid \
 	--disable-silent-rules \
 	--with-browser=elinks \
-	--with-sections="1 1p 8 2 3 3p 4 5 6 7 9 0p n l p o 1x 2x 3x 4x 5x 6x 7x 8x"
+	--with-sections="1 1p 8 2 3 3p 4 5 6 7 9 0p n l p o 1x 2x 3x 4x 5x 6x 7x 8x" \
+	--with-systemdtmpfilesdir=%{systemdtmpfilesdir}
 
 %{__make} \
 	V=1 \
 	CC="%{__cc} %{rpmcflags}"
+
+%{?with_tests:%{__make} check}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -117,11 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lexgrog
 %attr(755,root,root) %{_bindir}/catman
 %attr(755,root,root) %{_bindir}/mandb
-%attr(755,root,root) %{_bindir}/zsoelim
 %dir %{_libdir}/man-db
+%attr(755,root,root) %{_libdir}/man-db/zsoelim
 %attr(755,root,root) %{_libdir}/man-db/*.so
 %{_libdir}/man-db/globbing
 %{_libdir}/man-db/manconv
+%{systemdtmpfilesdir}/man-db.conf
 %dir %{cache}
 # documentation and translation
 %{_mandir}/man1/apropos.1*
