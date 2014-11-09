@@ -2,14 +2,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.7.0.2
+Version:	2.7.1
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	8ea7be9daf7af7da0fcd619e3da3991c
+# Source0-md5:	88d32360e2ed18e05de9b528ad336fd8
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -19,7 +19,7 @@ BuildRequires:	gdbm-devel
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	groff
 BuildRequires:	less
-BuildRequires:	libpipeline-devel >= 1.3.0
+BuildRequires:	libpipeline-devel >= 1.4.0
 BuildRequires:	pkgconfig
 BuildRequires:	po4a >= 0.41
 BuildRequires:	tar >= 1:1.22
@@ -31,7 +31,7 @@ Requires:	grep
 Requires:	groff
 Requires:	gzip
 Requires:	less
-Requires:	libpipeline >= 1.3.0
+Requires:	libpipeline >= 1.4.0
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
 Obsoletes:	man-config
@@ -74,7 +74,7 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 
 %{__make} \
 	V=1 \
-	CC="%{__cc} %{rpmcflags}"
+	CC="%{__cc} %{rpmcflags} %{rpmcppflags}"
 
 %{?with_tests:%{__make} check}
 
