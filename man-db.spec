@@ -1,4 +1,7 @@
-%bcond_without	tests
+#
+# Conditional build:
+%bcond_without	tests	# "make check" call
+#
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
