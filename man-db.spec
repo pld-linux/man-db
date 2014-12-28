@@ -19,7 +19,7 @@ Source2:	%{name}.sysconfig
 Patch0:		sgr.patch
 URL:		http://www.nongnu.org/man-db/
 BuildRequires:	gdbm-devel
-BuildRequires:	gettext-devel >= 0.18.1
+BuildRequires:	gettext-tools >= 0.18.1
 BuildRequires:	groff
 BuildRequires:	less
 BuildRequires:	libpipeline-devel >= 1.4.0
