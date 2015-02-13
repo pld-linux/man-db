@@ -6,7 +6,7 @@ Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
 Version:	2.7.1
-Release:	1
+Release:	2
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # move the documentation to relevant place
-mv $RPM_BUILD_ROOT%{_datadir}/doc/man-db/* ./
+mv $RPM_BUILD_ROOT%{_docdir}/man-db/* ./
 
 # remove libtool archives
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/man-db/*.la
@@ -102,6 +102,10 @@ install -D -p %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/man-db.cron
 
 # config for cron script
 install -D -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/man-db
+
+cat <<EOF > $RPM_BUILD_ROOT%{systemdtmpfilesdir}/man-db.conf
+d %{cache} 2755 root root 1w
+EOF
 
 %find_lang %{name}
 %find_lang %{name}-gnulib
