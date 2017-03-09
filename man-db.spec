@@ -6,7 +6,7 @@ Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
 Version:	2.7.3
-Release:	1
+Release:	1.1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -29,7 +29,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	coreutils
-Requires:	crontabs
+Requires:	cronjobs
 Requires:	grep
 Requires:	groff
 Requires:	gzip
