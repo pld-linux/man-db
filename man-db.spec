@@ -6,7 +6,7 @@ Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
 Version:	2.7.3
-Release:	2
+Release:	2.1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -15,6 +15,9 @@ Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar
 # Source0-md5:	df898c82d766dad6492a5a96d5a26647
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
+Source3:	cronjob-%{name}.timer
+Source4:	cronjob-%{name}.service
+
 # Resolves: #655385 - use old format of nroff output
 Patch0:		sgr.patch
 URL:		http://www.nongnu.org/man-db/
@@ -103,6 +106,12 @@ install -D -p %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/man-db.cron
 # config for cron script
 install -D -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/man-db
 
+# systemd timers 
+install -d  $RPM_BUILD_ROOT%{systemdunitdir}
+install -p %{SOURCE3} $RPM_BUILD_ROOT%{systemdunitdir}/cronjob-%{name}.timer
+install -p %{SOURCE4} $RPM_BUILD_ROOT%{systemdunitdir}/cronjob-%{name}.service
+
+
 cat <<EOF > $RPM_BUILD_ROOT%{systemdtmpfilesdir}/man-db.conf
 d %{cache} 2755 root root 1w
 EOF
@@ -113,6 +122,16 @@ cat %{name}-gnulib.lang >> %{name}.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%systemd_post cronjob-%{name}.timer
+
+%preun
+%systemd_preun cronjob-%{name}.timer
+
+%postun
+%systemd_reload
+
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -134,6 +153,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/man-db/globbing
 %{_libdir}/man-db/manconv
 %{systemdtmpfilesdir}/man-db.conf
+%{systemdunitdir}/cronjob-%{name}.service
+%{systemdunitdir}/cronjob-%{name}.timer
 %dir %{cache}
 # documentation and translation
 %{_mandir}/man1/apropos.1*
@@ -158,3 +179,5 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_mandir}/pl/man*/*
 %lang(ru) %{_mandir}/ru/man*/*
 %lang(zh_CN) %{_mandir}/zh_CN/man*/*
+
+

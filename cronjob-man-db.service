@@ -1,0 +1,13 @@
+[Unit]
+Description=man db  cronjob
+
+[Service]
+EnvironmentFile=/etc/sysconfig/man-db
+
+ExecStart=/usr/bin/mandb $OPTS
+Type=simple
+Nice=19
+IOSchedulingClass=2
+IOSchedulingPriority=7
+
+
