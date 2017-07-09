@@ -5,14 +5,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.7.3
-Release:	3
+Version:	2.7.6.1
+Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	df898c82d766dad6492a5a96d5a26647
+# Source0-md5:	2948d49d0ed7265f60f83aa4a9ac9268
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # NOTE: .timer/.service not needed, as there is /etc/cron.daily script, which will
@@ -181,6 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_mandir}/nl/man*/*
 %lang(pl) %{_mandir}/pl/man*/*
 %lang(ru) %{_mandir}/ru/man*/*
+%lang(sv) %{_mandir}/sv/man*/*
 %lang(zh_CN) %{_mandir}/zh_CN/man*/*
 
 
