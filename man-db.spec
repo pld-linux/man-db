@@ -1,3 +1,4 @@
+# TODO: use man cache owner?
 #
 # Conditional build:
 %bcond_without	tests	# "make check" call
@@ -15,12 +16,6 @@ Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar
 # Source0-md5:	2948d49d0ed7265f60f83aa4a9ac9268
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
-# NOTE: .timer/.service not needed, as there is /etc/cron.daily script, which will
-#	be called by systemd-cronjobs anyway
-#	Provide package crontab instead to enable systemd timer.
-# Source3:	cronjob-%{name}.timer
-# Source4:	cronjob-%{name}.service
-
 # Resolves: #655385 - use old format of nroff output
 Patch0:		sgr.patch
 URL:		http://www.nongnu.org/man-db/
@@ -68,13 +63,13 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 - lexgrog bezpośrednio odczytuje informacje z nagłówka stron
   podręcznika.
 
-
 %prep
 %setup -q
 %patch0 -p1
 
 %build
 %configure \
+	--disable-cache-owner \
 	--disable-setuid \
 	--disable-silent-rules \
 	--with-browser=elinks \
@@ -82,7 +77,6 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 	--with-systemdtmpfilesdir=%{systemdtmpfilesdir}
 
 %{__make} \
-	V=1 \
 	CC="%{__cc} %{rpmcflags} %{rpmcppflags}"
 
 %{?with_tests:%{__make} check}
@@ -95,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # move the documentation to relevant place
-mv $RPM_BUILD_ROOT%{_docdir}/man-db/* ./
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/man-db/* ./
 
 # remove libtool archives
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/man-db/*.la
@@ -109,12 +103,6 @@ install -D -p %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/man-db.cron
 # config for cron script
 install -D -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/man-db
 
-# systemd timers 
-# install -d  $RPM_BUILD_ROOT%{systemdunitdir}
-# install -p %{SOURCE3} $RPM_BUILD_ROOT%{systemdunitdir}/cronjob-%{name}.timer
-# install -p %{SOURCE4} $RPM_BUILD_ROOT%{systemdunitdir}/cronjob-%{name}.service
-
-
 cat <<EOF > $RPM_BUILD_ROOT%{systemdtmpfilesdir}/man-db.conf
 d %{cache} 2755 root root 1w
 EOF
@@ -126,16 +114,6 @@ cat %{name}-gnulib.lang >> %{name}.lang
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-%systemd_post cronjob-%{name}.timer
-
-%preun
-%systemd_preun cronjob-%{name}.timer
-
-%postun
-%systemd_reload
-
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README man-db-manual.txt man-db-manual.ps docs/COPYING ChangeLog NEWS
@@ -143,21 +121,19 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/man-db
 %attr(750,root,root) /etc/cron.daily/man-db.cron
 %attr(755,root,root) %{_sbindir}/accessdb
-%attr(755,root,root) %{_bindir}/man
-%attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_bindir}/apropos
-%attr(755,root,root) %{_bindir}/manpath
-%attr(755,root,root) %{_bindir}/lexgrog
 %attr(755,root,root) %{_bindir}/catman
+%attr(755,root,root) %{_bindir}/lexgrog
+%attr(755,root,root) %{_bindir}/man
 %attr(755,root,root) %{_bindir}/mandb
+%attr(755,root,root) %{_bindir}/manpath
+%attr(755,root,root) %{_bindir}/whatis
 %dir %{_libdir}/man-db
 %attr(755,root,root) %{_libdir}/man-db/zsoelim
 %attr(755,root,root) %{_libdir}/man-db/*.so
 %{_libdir}/man-db/globbing
 %{_libdir}/man-db/manconv
 %{systemdtmpfilesdir}/man-db.conf
-# %%{systemdunitdir}/cronjob-%{name}.service
-# %%{systemdunitdir}/cronjob-%{name}.timer
 %dir %{cache}
 # documentation and translation
 %{_mandir}/man1/apropos.1*
@@ -183,5 +159,3 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ru) %{_mandir}/ru/man*/*
 %lang(sv) %{_mandir}/sv/man*/*
 %lang(zh_CN) %{_mandir}/zh_CN/man*/*
-
-
