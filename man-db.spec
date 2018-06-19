@@ -43,7 +43,7 @@ Obsoletes:	man-config
 Obsoletes:	man-whatis
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		cache	/var/cache/man
+%define		pkgcachedir	/var/cache/man
 
 %description
 The man-db package includes five tools for browsing man-pages: man,
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/man-db/*.la
 
 # install cache directory
-install -d $RPM_BUILD_ROOT%{cache}
+install -d $RPM_BUILD_ROOT%{pkgcachedir}
 
 # install cron script for man-db creation/update
 install -D -p %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/man-db.cron
@@ -105,7 +105,7 @@ install -D -p %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/man-db.cron
 install -D -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/man-db
 
 cat <<EOF > $RPM_BUILD_ROOT%{systemdtmpfilesdir}/man-db.conf
-d %{cache} 2755 root root 1w
+d %{pkgcachedir} 2755 root root 1w
 EOF
 
 %find_lang %{name}
@@ -131,12 +131,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/whatis
 %dir %{_libdir}/man-db
 %attr(755,root,root) %{_libdir}/man-db/*.so
+%if "%{_libexecdir}" != "%{_libdir}"
 %dir %{_libexecdir}/man-db
+%endif
 %attr(755,root,root) %{_libexecdir}/man-db/zsoelim
 %{_libexecdir}/man-db/globbing
 %{_libexecdir}/man-db/manconv
 %{systemdtmpfilesdir}/man-db.conf
-%dir %{cache}
+%dir %{pkgcachedir}
 # documentation and translation
 %{_mandir}/man1/apropos.1*
 %{_mandir}/man1/lexgrog.1*
