@@ -6,18 +6,20 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.8.4
+Version:	2.8.5
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	ab41db551f500e4a595b11203b86c67a
+# Source0-md5:	c5c6c3434be14a5527d43b5ad0f09a13
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
 Patch0:		sgr.patch
+# recent nroff uses times()
+Patch1:		%{name}-sandbox.patch
 URL:		http://www.nongnu.org/man-db/
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext-tools >= 0.18.1
@@ -67,6 +69,7 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
@@ -137,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/man-db/zsoelim
 %{_libexecdir}/man-db/globbing
 %{_libexecdir}/man-db/manconv
+%{systemdunitdir}/man-db.service
+# TODO: as cron.daily replacement
+#%{systemdunitdir}/man-db.timer
 %{systemdtmpfilesdir}/man-db.conf
 %dir %{pkgcachedir}
 # documentation and translation
@@ -160,6 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ja) %{_mandir}/ja/man*/*
 %lang(nl) %{_mandir}/nl/man*/*
 %lang(pl) %{_mandir}/pl/man*/*
+%lang(pt) %{_mandir}/pt/man*/*
 %lang(pt_BR) %{_mandir}/pt_BR/man*/*
 %lang(ru) %{_mandir}/ru/man*/*
 %lang(sr) %{_mandir}/sr/man*/*
