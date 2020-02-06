@@ -6,14 +6,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.8.6.1
+Version:	2.9.0
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	22e82fe1127f4ca95de7100168a927d1
+# Source0-md5:	897576a19ecbef376a916485608cd790
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -129,6 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/catman
 %attr(755,root,root) %{_bindir}/lexgrog
 %attr(755,root,root) %{_bindir}/man
+%attr(755,root,root) %{_bindir}/man-recode
 %attr(755,root,root) %{_bindir}/mandb
 %attr(755,root,root) %{_bindir}/manpath
 %attr(755,root,root) %{_bindir}/whatis
@@ -149,6 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/apropos.1*
 %{_mandir}/man1/lexgrog.1*
 %{_mandir}/man1/man.1*
+%{_mandir}/man1/man-recode.1*
 %{_mandir}/man1/manconv.1*
 %{_mandir}/man1/manpath.1*
 %{_mandir}/man1/whatis.1*
