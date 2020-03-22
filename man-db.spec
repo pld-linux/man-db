@@ -22,7 +22,7 @@ Patch0:		sgr.patch
 Patch1:		%{name}-sandbox.patch
 URL:		http://www.nongnu.org/man-db/
 BuildRequires:	gdbm-devel
-BuildRequires:	gettext-tools >= 0.18.1
+BuildRequires:	gettext-tools >= 0.18.3
 BuildRequires:	groff
 BuildRequires:	less
 BuildRequires:	libpipeline-devel >= 1.5.0
