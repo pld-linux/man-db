@@ -6,14 +6,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.9.1
+Version:	2.9.3
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	593f4f0a26ab4f66f5b81cf6c0c7364c
+# Source0-md5:	4c8721faa54a4c950c640e5e5c713fb0
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -39,6 +39,7 @@ Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	libpipeline >= 1.5.0
+Suggests:	zstd
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
 Obsoletes:	man-config
@@ -78,7 +79,8 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 	--disable-silent-rules \
 	--with-browser=elinks \
 	--with-sections="1 1p 8 2 3 3p 4 5 6 7 9 0p n l p o 1x 2x 3x 4x 5x 6x 7x 8x" \
-	--with-systemdtmpfilesdir=%{systemdtmpfilesdir}
+	--with-systemdtmpfilesdir=%{systemdtmpfilesdir} \
+	--with-zstd=/usr/bin/zstd
 
 %{__make} \
 	CC="%{__cc} %{rpmcflags} %{rpmcppflags}"
