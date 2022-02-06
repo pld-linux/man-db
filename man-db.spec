@@ -6,14 +6,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.9.3
+Version:	2.10.0
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	4c8721faa54a4c950c640e5e5c713fb0
+# Source0-md5:	96009cd422f2e62b01b8c4de0f5691f1
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -42,8 +42,8 @@ Requires:	libpipeline >= 1.5.0
 Suggests:	zstd
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
-Obsoletes:	man-config
-Obsoletes:	man-whatis
+Obsoletes:	man-config < 1.7
+Obsoletes:	man-whatis < 1.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		pkgcachedir	/var/cache/man
@@ -122,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README man-db-manual.txt man-db-manual.ps docs/COPYING ChangeLog NEWS
+%doc ChangeLog FAQ NEWS.md README.md man-db-manual.txt man-db-manual.ps
 %config(noreplace) %{_sysconfdir}/man_db.conf
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/man-db
 %attr(750,root,root) /etc/cron.daily/man-db.cron
@@ -172,6 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_mandir}/pl/man*/*
 %lang(pt) %{_mandir}/pt/man*/*
 %lang(pt_BR) %{_mandir}/pt_BR/man*/*
+%lang(ro) %{_mandir}/ro/man*/*
 %lang(ru) %{_mandir}/ru/man*/*
 %lang(sr) %{_mandir}/sr/man*/*
 %lang(sv) %{_mandir}/sv/man*/*
