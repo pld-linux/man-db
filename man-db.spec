@@ -7,7 +7,7 @@ Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
 Version:	2.10.0
-Release:	1
+Release:	2
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
@@ -33,12 +33,12 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	coreutils
-Requires:	cronjobs
 Requires:	grep
 Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	libpipeline >= 1.5.0
+Suggests:	cronjobs
 Suggests:	zstd
 Provides:	man-pages-reader = %{version}
 Obsoletes:	man < 1.7
