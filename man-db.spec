@@ -6,21 +6,21 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.10.0
-Release:	2
+Version:	2.12.1
+Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	96009cd422f2e62b01b8c4de0f5691f1
+# Source0-md5:	7b044e5020aab89db41ac7ee59d6d84a
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
 Patch0:		sgr.patch
 # recent nroff uses times()
 Patch1:		%{name}-sandbox.patch
-URL:		http://www.nongnu.org/man-db/
+URL:		https://man-db.gitlab.io/man-db/
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext-tools >= 0.18.3
 BuildRequires:	groff
@@ -168,6 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(id) %{_mandir}/id/man*/*
 %lang(it) %{_mandir}/it/man*/*
 %lang(ja) %{_mandir}/ja/man*/*
+%lang(ko) %{_mandir}/ko/man*/*
 %lang(nl) %{_mandir}/nl/man*/*
 %lang(pl) %{_mandir}/pl/man*/*
 %lang(pt) %{_mandir}/pt/man*/*
