@@ -6,14 +6,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.12.1
+Version:	2.13.0
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	7b044e5020aab89db41ac7ee59d6d84a
+# Source0-md5:	97ab5f9f32914eef2062d867381d8cee
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -23,7 +23,7 @@ Patch1:		%{name}-sandbox.patch
 URL:		https://man-db.gitlab.io/man-db/
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext-tools >= 0.18.3
-BuildRequires:	groff
+BuildRequires:	groff >= 1:1.21
 BuildRequires:	less
 BuildRequires:	libpipeline-devel >= 1.5.0
 BuildRequires:	libseccomp-devel
@@ -34,7 +34,7 @@ BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	coreutils
 Requires:	grep
-Requires:	groff
+Requires:	groff >= 1:1.21
 Requires:	gzip
 Requires:	less
 Requires:	libpipeline >= 1.5.0
