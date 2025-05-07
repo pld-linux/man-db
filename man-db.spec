@@ -6,14 +6,14 @@
 Summary:	Tools for searching and reading man pages
 Summary(pl.UTF-8):	Narzędzia do przeszukiwania i czytania stron podręcznika man
 Name:		man-db
-Version:	2.13.0
+Version:	2.13.1
 Release:	1
 # project man-db  GPLv2+
 # Gnulib part     GPLv3+
 License:	GPL v2+ and GPL v3+
 Group:		Base
 Source0:	http://download.savannah.gnu.org/releases/man-db/%{name}-%{version}.tar.xz
-# Source0-md5:	97ab5f9f32914eef2062d867381d8cee
+# Source0-md5:	b6335533cbeac3b24cd7be31fdee8c83
 Source1:	%{name}.daily
 Source2:	%{name}.sysconfig
 # Resolves: #655385 - use old format of nroff output
@@ -89,6 +89,7 @@ man (nazywanych man-pages): man, whatis, apropos, manpath i lexgrog:
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	INSTALL='install -p' \
 	prefix=%{_prefix} \
@@ -178,4 +179,5 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sr) %{_mandir}/sr/man*/*
 %lang(sv) %{_mandir}/sv/man*/*
 %lang(tr) %{_mandir}/tr/man*/*
+%lang(uk) %{_mandir}/uk/man*/*
 %lang(zh_CN) %{_mandir}/zh_CN/man*/*
